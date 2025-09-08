@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>intervn.global</title>
+  <meta name="description" content="InterVN.Global — Wiki / Blog về game ." />
+  <style>
+    :root{--bg:#132645;--card:#0d1c3a;--muted:#9aa4b2;--accent:#6ee7b7;--text:#e6eef6}
+    *{box-sizing:border-box}
+    body{font-family:Inter,system-ui,Segoe UI,Roboto,'Helvetica Neue',Arial; margin:0; background:linear-gradient(180deg,#071021 0%,var(--bg) 100%); color:var(--text);}
+    header{display:flex;align-items:center;justify-content:space-between;padding:18px 24px;border-bottom:1px solid rgba(255,255,255,0.03);}
+    .brand{display:flex;gap:12px;align-items:center}
+    .logo{width:44px;height:44px;border-radius:8px;background:linear-gradient(135deg,#7aff87,#e2e53f);display:flex;align-items:center;justify-content:center;font-weight:700;color:#04111a}
+    h1{font-size:18px;margin:0}
+    .container{max-width:1100px;margin:28px auto;padding:0 18px;display:grid;grid-template-columns:1fr 340px;gap:20px}
+    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.04)); padding:18px;border-radius:12px;box-shadow:0 6px 18px rgba(2,6,23,0.6);}
+    .post-item{padding:12px;border-radius:8px;cursor:pointer;margin-bottom:10px;background:transparent}
+    .post-item:hover{background:rgba(255,255,255,0.02)}
+    .meta{font-size:12px;color:var(--muted)}
+    .title{font-weight:700;margin:6px 0}
+    .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+    .tag{font-size:12px;padding:6px 8px;border-radius:999px;background:rgba(255,255,255,0.03);}
+    .search{width:100%;padding:10px;border-radius:8px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.02);color:var(--text)}
+    .post-content{line-height:1.65}
+    .post-header{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+    .back-btn{background:transparent;border:1px solid rgba(255,255,255,0.05);padding:8px 10px;border-radius:8px;cursor:pointer}
+    footer{padding:18px;text-align:center;color:var(--muted);font-size:13px}
+    @media (max-width:900px){.container{grid-template-columns:1fr;}.right-col{order:2}.left-col{order:1}}
+    /* small markdown-like styles */
+    .post-content h1{font-size:28px;margin:8px 0}
+    .post-content h2{font-size:20px;margin:6px 0}
+    .post-content p{margin:10px 0}
+    .post-content pre{background:#09254f;color:var(--text);padding:12px;border-radius:8px;overflow:auto}
+    .post-content code{background:rgb(0, 0, 0);padding:2px 6px;border-radius:6px}
+    .btn{padding:8px 12px;border-radius:8px;border:0;cursor:pointer}
+    .muted{color:var(--muted)}
+    .small{font-size:13px}
+
+    /* style mới cho nút download */
+    .download-btn {
+      background: #1bd3e4;
+      color: #ff0141;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 12px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background 0.2s;
+    }
+    .download-btn:hover {
+      background: #2563eb;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <div class="logo">IV</div>
+      <div>
+        <h1>InterVN.global</h1>
+        <div class="muted small"> Blog Pro Version 11.02.50  </div>
+      </div>
+    </div>
+    <div style="display:flex;gap:10px;align-items:center">
+      <input id="searchTop" class="search" placeholder="Tìm kiếm bài viết, tag..." style="width:260px" />
+      <button id="darkToggle" class="btn">Toggle</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="left-col">
+      <div id="mainView" class="card"></div>
+    </section>
+
+    <aside class="right-col">
+      <div class="card">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <div class="muted">Bài viết gần đây</div>
+          <div class="small muted"></div>
+        </div>
+        <div id="recentList" style="margin-top:12px"></div>
+        <hr style="margin:12px 0;border-color:rgba(255,255,255,0.03)" />
+        <div class="muted">Tags</div>
+        <div id="tagList" class="tags" style="margin-top:8px"></div>
+      </div>
+
+      <div style="height:16px"></div>
+
+      <div class="card">
+        <div class="muted">LIÊN HỆ</div>
+        <div style="margin-top:10px;display:flex;flex-direction:column;gap:8px">
+          <button class="btn back-btn" id="homeBtn">SUPPORT</button>
+          <button class="btn back-btn" id="newPostExample">PROFILE</button>
+        </div>
+      </div>
+    </aside>
+  </main>
+
+  <footer>
+    © intervn.global - <code>Version 11.02.50</code> 
+  </footer>
+
+  <script>
+const POSTS = [
+  {
+     id: 'post-ff-max-optimize',
+      slug: 'free-fire-max-toi-uu',
+      title: 'Panel FFMAX',
+      category: 'Free Fire Max',
+      tags: ['freefiremax','pro','android','panel'],
+      createdAt: new Date("2025-07-09").getTime(),
+      body: `# Panel FFSM\n\n BY - INTERVN.GLOBAL \n\n## FILE \n- Xài FreeFireMax\n- DNS\n- PANEL FFSM\n\n## DOWNLOAD\n LƯU Ý : TẤT CẢ CÁC LINK ĐỀU KHÔNG CẦN VƯỢT!`,
+    fileLink: "https://intervn.github.io/LinkProInterVN/",
+    passwordLink: "https://thachdaublogger.site/ffsmofficialfreekey.php"
+  }
+  
+];
+
+function renderMarkdown(md){
+  if(!md) return '';
+  md = md.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  const lines = md.split(/\n/);
+  let out = '';
+  let inCode = false;
+  for(let i=0;i<lines.length;i++){
+    let line = lines[i];
+    if(line.startsWith('```')){ inCode = !inCode; out += inCode? '<pre><code>':'</code></pre>'; continue; }
+    if(inCode){ out += line + '\n'; continue; }
+    if(/^#{1}\s+/.test(line)){ out += '<h1>'+line.replace(/^#\s+/,'')+'</h1>'; continue; }
+    if(/^#{2}\s+/.test(line)){ out += '<h2>'+line.replace(/^##\s+/,'')+'</h2>'; continue; }
+    if(/^[-*]\s+/.test(line)){ out += '<li>'+line.replace(/^[-*]\s+/,'')+'</li>'; continue; }
+    if(line.trim()==='') { out += '<p></p>'; continue; }
+    line = line.replace(/`([^`]+)`/g,'<code>$1</code>');
+    line = line.replace(/\*\*([^*]+)\*\*/g,'<strong>$1</strong>');
+    line = line.replace(/\[([^\]]+)\]\(([^)]+)\)/g,'<a href="$2" target="_blank">$1</a>');
+    out += '<p>'+line+'</p>';
+  }
+  out = out.replace(/(<p><\/p>\s*)?(?:<li>.*?<\/li>\s*)+/gs, function(match){
+    const items = match.match(/<li>.*?<\/li>/gs);
+    if(!items) return match;
+    return '<ul>'+items.join('')+'</ul>';
+  });
+  return out;
+}
+
+const mainView = document.getElementById('mainView');
+const recentList = document.getElementById('recentList');
+const tagList = document.getElementById('tagList');
+const searchTop = document.getElementById('searchTop');
+
+function formatDate(ms){ 
+  const d = new Date(ms); 
+  return d.toLocaleDateString(); 
+}
+
+function renderHome(filterText=''){
+  const posts = POSTS.slice().sort((a,b)=>b.createdAt-a.createdAt);
+  const filtered = posts.filter(p=>{
+    const t = (p.title+' '+p.category+' '+p.tags.join(' ')+' '+(p.body||'')).toLowerCase();
+    return t.includes(filterText.toLowerCase());
+  });
+  let html = '<h2>Bài viết</h2>';
+  filtered.forEach(p=>{
+    html += `<div class="post-item" data-slug="${p.slug}"><div class="meta">${p.category} • ${formatDate(p.createdAt)}</div><div class="title">${p.title}</div></div>`;
+  });
+  mainView.innerHTML = html;
+  document.querySelectorAll('.post-item').forEach(el=>el.addEventListener('click',()=>{
+    const slug = el.getAttribute('data-slug');
+    location.hash = '#/post/'+slug;
+  }));
+}
+
+function renderPost(slug){
+  const post = POSTS.find(p=>p.slug===slug);
+  if(!post){ mainView.innerHTML = '<div class="muted">Bài viết không tìm thấy.</div>'; return; }
+  const html = `
+    <div class="post-header">
+      <div>
+        <div class="meta">${post.category} • ${formatDate(post.createdAt)}</div>
+        <h2 style="margin:6px 0">${post.title}</h2>
+      </div>
+      <div style="text-align:right">
+        <button class="back-btn" id="backBtn">Quay lại</button>
+      </div>
+    </div>
+    <hr />
+    <div class="post-content">${renderMarkdown(post.body)}</div>
+    <div style="margin-top:14px;display:flex;gap:8px">
+      <button class="download-btn" onclick="window.location.href='${post.fileLink}'">Lấy file</button>
+      <button class="download-btn" onclick="window.location.href='${post.passwordLink}'">Get Key Menu</button>
+    </div>
+  `;
+  mainView.innerHTML = html;
+  document.getElementById('backBtn').addEventListener('click',()=>{ location.hash = '#/'; });
+}
+
+function renderSidebar(){
+  const recent = POSTS.slice().sort((a,b)=>b.createdAt-a.createdAt).slice(0,6);
+  recentList.innerHTML = recent.map(p=>`<div class="post-item" data-slug="${p.slug}"><div class="title">${p.title}</div></div>`).join('');
+  document.querySelectorAll('#recentList .post-item').forEach(el=>el.addEventListener('click',()=>{ location.hash = '#/post/'+el.getAttribute('data-slug'); }));
+  const tags = {};
+  POSTS.forEach(p=>p.tags.forEach(t=>tags[t]=(tags[t]||0)+1));
+  tagList.innerHTML = Object.keys(tags).map(t=>`<span class="tag" data-tag="${t}">${t} (${tags[t]})</span>`).join('');
+}
+
+function router(){
+  const hash = location.hash || '#/';
+  if(hash.startsWith('#/post/')){
+    const slug = hash.replace('#/post/',''); renderPost(slug);
+  } else {
+    renderHome(searchTop.value||'');
+  }
+  renderSidebar();
+}
+
+window.addEventListener('hashchange', router);
+document.getElementById('homeBtn').addEventListener('click',()=>{ location.hash = '#/'; });
+document.getElementById('newPostExample').addEventListener('click',()=>{ alert(''); });
+searchTop.addEventListener('input', ()=>{ renderHome(searchTop.value); });
+router();
+</script>
+
+</body>
+</html>
